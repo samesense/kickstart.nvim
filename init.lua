@@ -639,7 +639,7 @@ vim.api.nvim_set_keymap('n', '<Leader>wk', '<C-w>k', {noremap = true, silent = t
 vim.api.nvim_set_keymap('n', '<Leader>wl', '<C-w>l', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<Leader>wh', '<C-w>h', {noremap = true, silent = true})
 -- maximize
-vim.api.nvim_set_keymap('n', '<Leader>wm', '<C-w>m', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>wm', '<C-w>o', {noremap = true, silent = true})
 
 -- vim.cmd("nnoremap <Leader>ws :<C-w>s")
 -- vim.cmd("nnoremap <Leader>wj :<C-w>j")
