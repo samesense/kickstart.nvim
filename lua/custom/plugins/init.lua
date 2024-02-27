@@ -4,6 +4,8 @@
 -- See the kickstart.nvim README for more information
 --
 --
+vim.opt.iskeyword:remove("_")
+
 vim.api.nvim_set_keymap('n', '<Leader>fs', ':w<CR>', {noremap = true, silent = true})
 --vim.cmd("nnoremap <Leader>k :w<CR>")
 vim.cmd("autocmd InsertLeave * :w")
@@ -18,6 +20,15 @@ vim.api.nvim_set_keymap('n', '<Leader>wk', '<C-w>k', {noremap = true, silent = t
 vim.api.nvim_set_keymap('n', '<Leader>wl', '<C-w>l', {noremap = true, silent = true})
 vim.api.nvim_set_keymap('n', '<Leader>wh', '<C-w>h', {noremap = true, silent = true})
 -- maximize
-vim.api.nvim_set_keymap('n', '<Leader>wm', '<C-w>m', {noremap = true, silent = true})
+vim.api.nvim_set_keymap('n', '<Leader>wo', '<C-w>o', {noremap = true, silent = true})
 
-return {}
+vim.keymap.set("n", "<C-n>", ":Neotree filesystem reveal left<CR>", {})
+vim.keymap.set("n", "<leader>bf", ":Neotree buffers reveal float<CR>", {})
+
+return {
+	{
+		"nvim-neo-tree/neo-tree.nvim",
+		branch = "v3.x", dependencies = {"nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons", "MunifTanjim/nui.nvim",
+		}                                                                                                                                                  
+	},
+}
