@@ -708,7 +708,7 @@ require('lazy').setup({
           end, { 'i', 's' }),
         },
         sources = {
-          { name = "copilot", group_index=2 },
+          { name = 'copilot', group_index = 2 },
           { name = 'nvim_lsp' },
           { name = 'luasnip' },
           { name = 'path' },
@@ -801,7 +801,6 @@ require('lazy').setup({
     end,
   },
 
-
   -- The following two comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- put them in the right spots if you want.
@@ -820,6 +819,7 @@ require('lazy').setup({
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information see: :help lazy.nvim-lazy.nvim-structuring-your-plugins
   { import = 'custom.plugins' },
+  -- { import = 'custom.nvim-sm-helpers' },
 }, {
   ui = {
     -- If you have a Nerd Font, set icons to an empty table which will use the
