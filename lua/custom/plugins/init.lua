@@ -2,9 +2,9 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
---
---
+
 vim.opt.iskeyword:remove("_")
+vim.api.nvim_del_keymap('n', 'gc')
 
 -- sm_run
 --local open_and_modify = require'sm_run'
