@@ -85,6 +85,27 @@ config = function () require("snakemake") vim.keymap.set('n', '<Leader>o', funct
    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
    opts = {}
 },
+        {
+  'stevearc/conform.nvim',
+  opts = {},
+                config = function()
+                        require("conform").setup({
+                                format_on_save = {
+    -- These options will be passed to conform.format()
+    timeout_ms = 500,
+    lsp_format = "fallback",
+  },
+  formatters_by_ft = {
+    lua = { "stylua" },
+    -- Conform will run multiple formatters sequentially
+    python = { "isort", "black" },
+                                        snakemake = {"snakefmt"},
+    -- You can customize some of the format options for the filetype (:help conform.format)
+    rust = { "rustfmt", lsp_format = "fallback" },
+  },
+})
+                end,
+},
 
 	{
     "svampkorg/moody.nvim",
