@@ -2,9 +2,15 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
+<<<<<<< HEAD
 --
 --
 vim.opt.iskeyword:remove '_'
+=======
+
+vim.opt.iskeyword:remove("_")
+vim.api.nvim_del_keymap('n', 'gc')
+>>>>>>> 1c66d964ba736e9d2317087398d2d5ef01a0effa
 
 -- sm_run
 --local open_and_modify = require'sm_run'
@@ -118,6 +124,27 @@ config = function () require("snakemake") vim.keymap.set('n', '<Leader>o', funct
    "m4xshen/hardtime.nvim",
    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
    opts = {}
+},
+        {
+  'stevearc/conform.nvim',
+  opts = {},
+                config = function()
+                        require("conform").setup({
+                                format_on_save = {
+    -- These options will be passed to conform.format()
+    timeout_ms = 500,
+    lsp_format = "fallback",
+  },
+  formatters_by_ft = {
+    lua = { "stylua" },
+    -- Conform will run multiple formatters sequentially
+    python = { "isort", "black" },
+                                        snakemake = {"snakefmt"},
+    -- You can customize some of the format options for the filetype (:help conform.format)
+    rust = { "rustfmt", lsp_format = "fallback" },
+  },
+})
+                end,
 },
 
 	{
