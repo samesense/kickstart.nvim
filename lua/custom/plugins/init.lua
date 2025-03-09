@@ -4,6 +4,20 @@ vim.cmd [[
   set t_te=
 ]]
 
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = '*.R',
+  callback = function(args)
+    require('conform').format { bufnr = args.buf }
+  end,
+})
+
+vim.api.nvim_create_autocmd('BufWritePre', {
+  pattern = '*.qmd',
+  callback = function(args)
+    require('conform').format { bufnr = args.buf }
+  end,
+})
+
 --vim.opt.clipboard = '' -- Only use system clipboard when explicitly requested
 vim.api.nvim_set_keymap('n', 'ciw', '"_ciw', { noremap = true, silent = true })
 -- window control
@@ -192,6 +206,21 @@ return {
           lsp_format = 'fallback',
         },
         formatters_by_ft = {
+          qmd = {
+            command = 'Rscript',
+            args = { '-e', 'styler::style_file(commandArgs(trailingOnly=TRUE))' },
+            stdin = false, -- Styler processes files directly
+          },
+          R = {
+            command = 'Rscript',
+            args = { '-e', 'styler::style_file(commandArgs(trailingOnly=TRUE))' },
+            stdin = false, -- Styler processes files directly
+          },
+          r = {
+            command = 'Rscript',
+            args = { '-e', 'styler::style_file(commandArgs(trailingOnly=TRUE))' },
+            stdin = false, -- Styler processes files directly
+          },
           lua = { 'stylua' },
           -- Conform will run multiple formatters sequentially
           python = { 'isort', 'black' },
