@@ -194,6 +194,7 @@ return {
   },
 
   { 'raivivek/nextflow.vim' },
+  require 'custom.plugins.savitsky',
 
   {
     'stevearc/conform.nvim',
