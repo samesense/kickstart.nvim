@@ -1015,54 +1015,90 @@ require('lazy').setup({
       }
 
       local bull_theme = {
-        rosewater = '#b0a898',
-        flamingo = '#b0a888',
-        pink = '#b09878',
-        red = '#b8a080',
-        maroon = '#b0a8a0',
-        peach = '#f09000',
-        yellow = '#d88800',
-        green = '#e08000',
-        mauve = '#989890',
-        text = '#f0a878',
-        overlay1 = '#988870',
-        surface1 = '#606060',
-        base = '#100800',
+        base = '#102018',
+        mantle = '#102830',
+        crust = '#001820',
+        surface2 = '#406060',
+        surface1 = '#405040',
+        surface0 = '#183840',
+        overlay2 = '#a09880',
+        overlay1 = '#8088a0',
+        overlay0 = '#787860',
+        text = '#e0c0b0',
+        subtext1 = '#d0b0a0',
+        subtext0 = '#88a898',
+        mauve = '#7858a2',
+        teal = '#4a4d82',
+        sky = '#4b4e7b',
+        sapphire = '#464f7c',
+        blue = '#454c8a',
+        lavender = '#454e83',
+        peach = '#f8c000',
+        yellow = '#f8c008',
+        green = '#f8b800',
+        rosewater = '#b07060',
+        flamingo = '#684038',
+        pink = '#805048',
+        red = '#805850',
+        maroon = '#a08078',
       }
 
-      local witch_theme = {
-        rosewater = '#b0a8a0',
-        flamingo = '#b8b0a8',
-        pink = '#c0a898',
-        red = '#c0a8a0',
-        maroon = '#c0b098',
-        teal = '#d0a068',
-        sky = '#d8a870',
-        sapphire = '#d0a860',
-        blue = '#e8a850',
-        lavender = '#d8a050',
-        text = '#f0f0b0',
-        overlay1 = '#c89058',
-        surface1 = '#887040',
-        base = '#081000',
+      local box_theme = {
+        base = '#382820',
+        mantle = '#403038',
+        crust = '#302028',
+        surface2 = '#587880',
+        surface1 = '#406068',
+        surface0 = '#685048',
+        overlay2 = '#b0a890',
+        overlay1 = '#80a0b0',
+        overlay0 = '#a08878',
+        text = '#f0d8c0',
+        subtext1 = '#e8c8b8',
+        subtext0 = '#d8b0b0',
+        mauve = '#f1caff',
+        teal = '#a0a8e0',
+        sky = '#a0a0d8',
+        sapphire = '#7088d0',
+        blue = '#6888d0',
+        lavender = '#98a0d8',
+        peach = '#c89860',
+        yellow = '#c89868',
+        green = '#c89058',
+        rosewater = '#e08080',
+        flamingo = '#e88888',
+        pink = '#e88080',
+        red = '#c87070',
+        maroon = '#c06868',
       }
 
-      local couple_theme = {
-        rosewater = '#888080',
-        flamingo = '#807878',
-        pink = '#707878',
-        red = '#808880',
-        maroon = '#787868',
-        teal = '#b08000',
-        sky = '#987000',
-        sapphire = '#b08800',
-        blue = '#987830',
-        lavender = '#987828',
-        mauve = '#907860',
-        text = '#b89868',
-        overlay1 = '#786848',
-        surface1 = '#784040',
-        base = '#081010',
+      local camels_theme = {
+        base = '#302028',
+        mantle = '#203028',
+        crust = '#281818',
+        surface2 = '#486870',
+        surface1 = '#685048',
+        surface0 = '#504050',
+        overlay2 = '#a8a0b8',
+        overlay1 = '#9890a8',
+        overlay0 = '#988070',
+        text = '#f0c8d0',
+        subtext1 = '#e0b8b8',
+        subtext0 = '#90b8b0',
+        mauve = '#6b4c94',
+        teal = '#a0a0e0',
+        sky = '#a0b0e8',
+        sapphire = '#88b0e8',
+        blue = '#78a0e8',
+        lavender = '#98b0e8',
+        peach = '#f8c800',
+        yellow = '#f8c810',
+        green = '#f8d020',
+        rosewater = '#c03030',
+        flamingo = '#d85840',
+        pink = '#f07058',
+        red = '#c85038',
+        maroon = '#d86048',
       }
 
       ----------------------------------------------------------------------
@@ -1070,7 +1106,7 @@ require('lazy').setup({
       ----------------------------------------------------------------------
       cp.setup {
         flavour = 'mocha',
-        color_overrides = { mocha = abstractBoxes2_theme },
+        color_overrides = { mocha = bull_theme },
       }
       vim.cmd.colorscheme 'catppuccin-mocha'
 
@@ -1078,108 +1114,108 @@ require('lazy').setup({
       -- Commands
       ----------------------------------------------------------------------
 
-      -- 1. Bull Latte (warm earthy painting palette)
-      vim.api.nvim_create_user_command('BullLatte', function()
-        cp.setup {
-          flavour = 'latte',
-          color_overrides = { latte = bull_latte },
-          highlight_overrides = {
-            latte = function(c)
-              return {
-                -- ============================================================
-                -- CORE SYNTAX
-                -- ============================================================
-                Comment = { fg = c.overlay0, italic = true },
-                Keyword = { fg = c.blue, bold = true },
-                Conditional = { fg = c.blue, bold = true },
-                Repeat = { fg = c.blue, bold = true },
-
-                Function = { fg = c.peach },
-                Identifier = { fg = c.text },
-                String = { fg = c.flamingo },
-                Number = { fg = c.yellow },
-                Operator = { fg = c.sky },
-
-                -- ============================================================
-                -- LINE NUMBERS
-                -- ============================================================
-                LineNr = { fg = c.overlay1 },
-                CursorLineNr = { fg = c.peach, bold = true },
-
-                -- ============================================================
-                -- CURSOR LINE (fix unreadable highlighted line)
-                -- ============================================================
-                CursorLine = { bg = c.mantle }, -- darker, neutral, readable
-                CursorColumn = { bg = c.mantle },
-
-                -- ============================================================
-                -- VISUAL SELECTION
-                -- ============================================================
-                Visual = { bg = c.surface1 },
-
-                -- ============================================================
-                -- FLOAT WINDOWS
-                -- ============================================================
-                NormalFloat = { fg = c.text, bg = c.base },
-                FloatBorder = { fg = c.sapphire, bg = c.base },
-
-                -- ============================================================
-                -- STATUSLINE (fix unreadable blocks)
-                -- ============================================================
-                StatusLine = { fg = c.text, bg = c.crust },
-                StatusLineNC = { fg = c.overlay1, bg = c.crust },
-                StatusLineTerm = { fg = c.text, bg = c.crust },
-                StatusLineTermNC = { fg = c.overlay1, bg = c.crust },
-
-                ----------------------------------------------------------------
-                -- MINI.STATUSLINE (this is what your screenshot shows)
-                -- ============================================================
-                -- Mode sections get bull colors (blue/peach/sapphire)
-                ----------------------------------------------------------------
-                MiniStatuslineModeNormal = { fg = c.base, bg = c.blue, bold = true },
-                MiniStatuslineModeInsert = { fg = c.base, bg = c.green, bold = true },
-                MiniStatuslineModeVisual = { fg = c.base, bg = c.peach, bold = true },
-                MiniStatuslineModeReplace = { fg = c.base, bg = c.red, bold = true },
-                MiniStatuslineModeCommand = { fg = c.base, bg = c.sapphire, bold = true },
-
-                -- Filename + Git + LSP sections
-                MiniStatuslineFilename = { fg = c.text, bg = c.mantle },
-                MiniStatuslineDevinfo = { fg = c.text, bg = c.mantle },
-                MiniStatuslineInactive = { fg = c.overlay1, bg = c.crust },
-
-                -- ============================================================
-                -- TABLINE (optional but helps readability)
-                -- ============================================================
-                TabLine = { fg = c.overlay1, bg = c.crust },
-                TabLineSel = { fg = c.text, bg = c.blue },
-                TabLineFill = { fg = c.overlay0, bg = c.crust },
-              }
-            end,
-          },
-        }
-        vim.cmd.colorscheme 'catppuccin-latte'
-        print 'Bull Latte Loaded'
-      end, {})
+      -- -- 1. Bull Latte (warm earthy painting palette)
+      -- vim.api.nvim_create_user_command('BullLatte', function()
+      --   cp.setup {
+      --     flavour = 'latte',
+      --     color_overrides = { latte = bull_latte },
+      --     highlight_overrides = {
+      --       latte = function(c)
+      --         return {
+      --           -- ============================================================
+      --           -- CORE SYNTAX
+      --           -- ============================================================
+      --           Comment = { fg = c.overlay0, italic = true },
+      --           Keyword = { fg = c.blue, bold = true },
+      --           Conditional = { fg = c.blue, bold = true },
+      --           Repeat = { fg = c.blue, bold = true },
+      --
+      --           Function = { fg = c.peach },
+      --           Identifier = { fg = c.text },
+      --           String = { fg = c.flamingo },
+      --           Number = { fg = c.yellow },
+      --           Operator = { fg = c.sky },
+      --
+      --           -- ============================================================
+      --           -- LINE NUMBERS
+      --           -- ============================================================
+      --           LineNr = { fg = c.overlay1 },
+      --           CursorLineNr = { fg = c.peach, bold = true },
+      --
+      --           -- ============================================================
+      --           -- CURSOR LINE (fix unreadable highlighted line)
+      --           -- ============================================================
+      --           CursorLine = { bg = c.mantle }, -- darker, neutral, readable
+      --           CursorColumn = { bg = c.mantle },
+      --
+      --           -- ============================================================
+      --           -- VISUAL SELECTION
+      --           -- ============================================================
+      --           Visual = { bg = c.surface1 },
+      --
+      --           -- ============================================================
+      --           -- FLOAT WINDOWS
+      --           -- ============================================================
+      --           NormalFloat = { fg = c.text, bg = c.base },
+      --           FloatBorder = { fg = c.sapphire, bg = c.base },
+      --
+      --           -- ============================================================
+      --           -- STATUSLINE (fix unreadable blocks)
+      --           -- ============================================================
+      --           StatusLine = { fg = c.text, bg = c.crust },
+      --           StatusLineNC = { fg = c.overlay1, bg = c.crust },
+      --           StatusLineTerm = { fg = c.text, bg = c.crust },
+      --           StatusLineTermNC = { fg = c.overlay1, bg = c.crust },
+      --
+      --           ----------------------------------------------------------------
+      --           -- MINI.STATUSLINE (this is what your screenshot shows)
+      --           -- ============================================================
+      --           -- Mode sections get bull colors (blue/peach/sapphire)
+      --           ----------------------------------------------------------------
+      --           MiniStatuslineModeNormal = { fg = c.base, bg = c.blue, bold = true },
+      --           MiniStatuslineModeInsert = { fg = c.base, bg = c.green, bold = true },
+      --           MiniStatuslineModeVisual = { fg = c.base, bg = c.peach, bold = true },
+      --           MiniStatuslineModeReplace = { fg = c.base, bg = c.red, bold = true },
+      --           MiniStatuslineModeCommand = { fg = c.base, bg = c.sapphire, bold = true },
+      --
+      --           -- Filename + Git + LSP sections
+      --           MiniStatuslineFilename = { fg = c.text, bg = c.mantle },
+      --           MiniStatuslineDevinfo = { fg = c.text, bg = c.mantle },
+      --           MiniStatuslineInactive = { fg = c.overlay1, bg = c.crust },
+      --
+      --           -- ============================================================
+      --           -- TABLINE (optional but helps readability)
+      --           -- ============================================================
+      --           TabLine = { fg = c.overlay1, bg = c.crust },
+      --           TabLineSel = { fg = c.text, bg = c.blue },
+      --           TabLineFill = { fg = c.overlay0, bg = c.crust },
+      --         }
+      --       end,
+      --     },
+      --   }
+      --   vim.cmd.colorscheme 'catppuccin-latte'
+      --   print 'Bull Latte Loaded'
+      -- end, {})
 
       -- 2. Painting Mocha Light
-      vim.api.nvim_create_user_command('PaintingMochaLight', function()
-        cp.setup {
-          flavour = 'mocha',
-          color_overrides = { mocha = painting_light },
-        }
-        vim.cmd.colorscheme 'catppuccin-mocha'
-        print 'Painting Mocha Light Loaded'
-      end, {})
-
-      -- 3. Painting Mocha Dark
-      vim.api.nvim_create_user_command('PaintingMochaDark', function()
-        cp.setup {
-          flavour = 'mocha',
-          color_overrides = { mocha = painting_dark },
-        }
-        vim.cmd.colorscheme 'catppuccin-mocha'
-        print 'Painting Mocha Dark Loaded'
-      end, {})
+      -- vim.api.nvim_create_user_command('PaintingMochaLight', function()
+      --   cp.setup {
+      --     flavour = 'mocha',
+      --     color_overrides = { mocha = painting_light },
+      --   }
+      --   vim.cmd.colorscheme 'catppuccin-mocha'
+      --   print 'Painting Mocha Light Loaded'
+      -- end, {})
+      --
+      -- -- 3. Painting Mocha Dark
+      -- vim.api.nvim_create_user_command('PaintingMochaDark', function()
+      --   cp.setup {
+      --     flavour = 'mocha',
+      --     color_overrides = { mocha = painting_dark },
+      --   }
+      --   vim.cmd.colorscheme 'catppuccin-mocha'
+      --   print 'Painting Mocha Dark Loaded'
+      -- end, {})
     end,
   },
 
