@@ -8,6 +8,16 @@ vim.api.nvim_create_user_command('SavitskyList', function()
   end
 end, {})
 
+vim.api.nvim_create_user_command('SavitskyLoad', function(opts)
+  require('savitsky').load(opts.args)
+end, {
+  nargs = 1,
+  complete = function()
+    local registry = require 'savitsky.registry'
+    return vim.tbl_keys(registry)
+  end,
+})
+
 function M.setup()
   -- optional: nothing required here, but keep for API symmetry
 end
@@ -15,20 +25,23 @@ end
 function M.load(name)
   local theme = registry[name]
   if not theme then
-    error('Unknown theme: ' .. name)
+    vim.notify('Savitsky: unknown theme ' .. name, vim.log.levels.ERROR)
+    return
   end
 
   local cp = require 'catppuccin'
 
-  -- IMPORTANT: override ONLY the selected theme for its flavour
   cp.setup {
     flavour = theme.flavour,
     color_overrides = {
       [theme.flavour] = theme.palette,
     },
+    highlight_overrides = {
+      [theme.flavour] = theme.highlights,
+    },
   }
 
-  vim.cmd.colorscheme('catppuccin-' .. theme.flavour)
+  vim.cmd('colorscheme catppuccin-' .. theme.flavour)
 end
 
 return M
