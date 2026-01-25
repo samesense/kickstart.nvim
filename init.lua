@@ -160,6 +160,9 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Show dialog instead of failing when quitting with unsaved changes
+vim.opt.confirm = true
+
 -- [[ Basic Keymaps ]]
 -- NOTE: Non-plugin keymaps are consolidated in lua/custom/keymaps.lua
 
@@ -248,6 +251,7 @@ require('lazy').setup({
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     opts = {
+      delay = 0, -- Instant popup
       icons = {
         -- set icon mappings to true if you have a Nerd Font
         mappings = vim.g.have_nerd_font,
