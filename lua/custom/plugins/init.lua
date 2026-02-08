@@ -1,42 +1,45 @@
--- keep content visible after exit
+-- Load custom keymaps
+require 'custom.keymaps'
+
+-- Keep content visible after exit
 vim.cmd [[
   set t_ti=
   set t_te=
 ]]
 
-vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
-  pattern = { 'Snakefile_*', '*.smk' },
-  callback = function(args)
-    vim.diagnostic.disable(args.buf)
-  end,
-})
-
-vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = '*.qmd',
-  callback = function(args)
-    require('conform').format { bufnr = args.buf }
-  end,
-})
-
---vim.opt.clipboard = '' -- Only use system clipboard when explicitly requested
-vim.api.nvim_set_keymap('n', 'ciw', '"_ciw', { noremap = true, silent = true })
--- window control
---vim.api.nvim_del_keymap('n', '<leader>ws')
-vim.api.nvim_set_keymap('n', '<Leader>ws', '<C-w>s', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>wj', '<C-w>j', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>wk', '<C-w>k', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>wl', '<C-w>l', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>wh', '<C-w>h', { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<Leader>wo', '<C-w>o', { noremap = true, silent = true })
-
-vim.api.nvim_set_keymap('n', '<Leader>fs', ':w<CR>', { noremap = true, silent = true })
-
+-- <<<<<<< HEAD
+-- vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+--   pattern = { 'Snakefile_*', '*.smk' },
+--   callback = function(args)
+--     vim.diagnostic.disable(args.buf)
+--   end,
+-- })
+--
+-- vim.api.nvim_create_autocmd('BufWritePre', {
+--   pattern = '*.qmd',
+--   callback = function(args)
+--     require('conform').format { bufnr = args.buf }
+--   end,
+-- })
+--
+-- --vim.opt.clipboard = '' -- Only use system clipboard when explicitly requested
+-- vim.api.nvim_set_keymap('n', 'ciw', '"_ciw', { noremap = true, silent = true })
+-- -- window control
+-- --vim.api.nvim_del_keymap('n', '<leader>ws')
+-- vim.api.nvim_set_keymap('n', '<Leader>ws', '<C-w>s', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>wj', '<C-w>j', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>wk', '<C-w>k', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>wl', '<C-w>l', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>wh', '<C-w>h', { noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<Leader>wo', '<C-w>o', { noremap = true, silent = true })
+--
+-- vim.api.nvim_set_keymap('n', '<Leader>fs', ':w<CR>', { noremap = true, silent = true })
+--
+-- =======
+-- -- Custom options
+-- >>>>>>> 5dba89802b06fccc3e784ba9aec3cb8642b6a7b8
 vim.opt.relativenumber = true
 vim.opt.iskeyword:remove '_'
-
--- remove confirm format keymap
--- vim.api.nvim_del_keymap('n', '<leader>f')
---
 
 return {
   {
@@ -193,7 +196,21 @@ return {
     },
   },
 
+  {
+    'R-nvim/R.nvim',
+    lazy = false,
+  },
+
   { 'raivivek/nextflow.vim' },
+
+  {
+    'samesense/savitsky.nvim',
+    dependencies = { 'catppuccin/nvim' },
+    config = function()
+      -- optional: set a default theme on startup
+      require('savitsky').load 'bull' -- whatever is in your registry
+    end,
+  },
 
   {
     'stevearc/conform.nvim',
