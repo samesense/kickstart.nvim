@@ -4,10 +4,10 @@ vim.cmd [[
   set t_te=
 ]]
 
-vim.api.nvim_create_autocmd('BufWritePre', {
-  pattern = '*.R',
+vim.api.nvim_create_autocmd({ 'BufRead', 'BufNewFile' }, {
+  pattern = { 'Snakefile_*', '*.smk' },
   callback = function(args)
-    require('conform').format { bufnr = args.buf }
+    vim.diagnostic.disable(args.buf)
   end,
 })
 
